@@ -1,14 +1,18 @@
 import AddTodo from './AddTodo.tsx'
+import ViewTodos from './ViewTodos.tsx'
 
 function App() {
   return (
     <>
-      <header className="header">
-        <h1>todos</h1>
-        <AddTodo />
-      </header>
-      <section className="main"></section>
-      <footer className="footer"></footer>
+      <div className='main'>
+        <header className="header container">
+          <h1>Todos</h1>
+          <AddTodo />
+          <ViewTodos />
+        </header>
+        <section className="main"></section>
+        <footer className="footer"></footer>
+      </div>
     </>
   )
 }
