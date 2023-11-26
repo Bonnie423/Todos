@@ -11,8 +11,9 @@ interface newTask{
   task: string
 }
 export async function addTask(task: newTask) {
-  console.log(task)
+  // console.log(task)
   const response = await request.post(`/api/v1/tasks/`).send( {task} )
+  console.log(response.body)
 
   return response.body as todoListDataType[]
 }
