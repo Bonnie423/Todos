@@ -1,11 +1,11 @@
-import knexfile from './knexfile.js'
-import knex from 'knex'
+
+import connection from './connection.js'
 import {
   todoListFormData,
   todoListDataType,
 } from '../../client/Model/todoListData.js'
 
-const db = knex(knexfile.development)
+const db = connection
 
 export async function getToDoList() {
   const tasks = await db('todoList').select(
