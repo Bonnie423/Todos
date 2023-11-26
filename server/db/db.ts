@@ -33,5 +33,6 @@ export async function checkoffTodo(data: todoListDataType) {
 }
 
 export async function deleteTask(id: number) {
-  await db('todoList').where('id', id).del()
+  const result =await db('todoList').where('id', id).del()
+  return result
 }
