@@ -1,10 +1,5 @@
-import {
-  QueryClient,
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from '@tanstack/react-query'
-import React from 'react'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
 import { deleteTask, getToDoList, updateTodo } from '../apis/todoListAPI'
 
 const ViewTodos = () => {
@@ -28,9 +23,9 @@ const ViewTodos = () => {
 
   const deleteTaskMutation = useMutation({
     mutationFn: deleteTask,
-    onSuccess: ()=>{
-      queryClient.invalidateQueries({ queryKey: ['tasks']})
-    }
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
+    },
   })
 
   if (isError) {
@@ -40,24 +35,37 @@ const ViewTodos = () => {
   if (!tasks || isLoading) {
     return <p>Loading...</p>
   }
-console.log(tasks)
+  console.log(tasks)
   return (
     <div>
       <ul className="list-group">
         {tasks.map((task, index) => (
-          <li key={index} className="list-group-item d-flex justify-content-between">
-            <label htmlFor="task"  className="form-check-label">{task.task}</label>
+          <li
+            key={index}
+            className="list-group-item d-flex justify-content-between"
+          >
+            <label htmlFor="task" className="form-check-label">
+              {task.task}
+            </label>
             <div>
-            <input className="form-check-label check-task"
-              type="checkbox"
-              name="task"
-              checked={task.complete}
-              onChange={() =>
-                updateTaskMutation.mutate({ ...task, complete: !task.complete })
-                
-              }
-            />
-            <button onClick={()=>deleteTaskMutation.mutate(task.id)}  className="btn btn-outline-danger btn-sm">Delete</button>
+              <input
+                className="form-check-label check-task"
+                type="checkbox"
+                name="task"
+                checked={task.complete}
+                onChange={() =>
+                  updateTaskMutation.mutate({
+                    ...task,
+                    complete: !task.complete,
+                  })
+                }
+              />
+              <button
+                onClick={() => deleteTaskMutation.mutate(task.id)}
+                className="btn btn-outline-danger btn-sm"
+              >
+                Delete
+              </button>
             </div>
           </li>
         ))}
